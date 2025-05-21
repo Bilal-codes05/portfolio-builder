@@ -7,11 +7,162 @@
   <title>Student Portfolio Builder - Form</title>
   <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+  <style>
+    /* Background animated dots container */
+    #animated-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 0; /* behind everything */
+      overflow: hidden;
+      pointer-events: none; /* clicks pass through */
+      background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+    }
+
+    /* Common dot styles */
+    .dot {
+      position: absolute;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+      filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.1));
+    }
+
+    /* Different sizes and animation durations */
+    .dot1 {
+      width: 8px;
+      height: 8px;
+      top: 10%;
+      left: 15%;
+      animation-name: moveDot1;
+      animation-duration: 25s;
+    }
+
+    .dot2 {
+      width: 12px;
+      height: 12px;
+      top: 30%;
+      left: 50%;
+      animation-name: moveDot2;
+      animation-duration: 30s;
+    }
+
+    .dot3 {
+      width: 6px;
+      height: 6px;
+      top: 50%;
+      left: 80%;
+      animation-name: moveDot3;
+      animation-duration: 20s;
+    }
+
+    .dot4 {
+      width: 10px;
+      height: 10px;
+      top: 70%;
+      left: 20%;
+      animation-name: moveDot4;
+      animation-duration: 35s;
+    }
+
+    .dot5 {
+      width: 7px;
+      height: 7px;
+      top: 80%;
+      left: 60%;
+      animation-name: moveDot5;
+      animation-duration: 22s;
+    }
+
+    /* Animation keyframes */
+    @keyframes moveDot1 {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(30px, 20px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    @keyframes moveDot2 {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(-40px, 30px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    @keyframes moveDot3 {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(20px, -30px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    @keyframes moveDot4 {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(-25px, 40px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+
+    @keyframes moveDot5 {
+      0% {
+        transform: translate(0, 0);
+      }
+
+      50% {
+        transform: translate(15px, -25px);
+      }
+
+      100% {
+        transform: translate(0, 0);
+      }
+    }
+  </style>
 </head>
 
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen flex items-center justify-center text-gray-100">
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 min-h-screen flex items-center justify-center text-gray-100 relative">
 
-  <div class="bg-gray-800 p-10 rounded-2xl shadow-xl w-full max-w-4xl">
+  <!-- Animated background dots -->
+  <div id="animated-bg" aria-hidden="true">
+    <div class="dot dot1"></div>
+    <div class="dot dot2"></div>
+    <div class="dot dot3"></div>
+    <div class="dot dot4"></div>
+    <div class="dot dot5"></div>
+  </div>
+
+  <div class="bg-gray-800 p-10 rounded-2xl shadow-xl w-full max-w-4xl relative z-10">
     <header class="flex justify-between items-center mb-8">
       <h1 class="text-3xl font-bold text-white">Folio Forge</h1>
       <img src="folioforge.png" alt="Company Logo" class="w-40 h-30" />
@@ -20,31 +171,63 @@
     <section id="builder">
       <h2 class="text-2xl font-bold mb-6 text-white">Build Your Portfolio</h2>
       <form id="portfolioForm" class="grid grid-cols-2 gap-6">
-        <input 
-          type="text" 
-          name="name" 
-          pattern="[A-Za-z ]+" 
-          placeholder="Your Name" 
+        <input
+          type="text"
+          name="name"
+          pattern="[A-Za-z ]+"
+          placeholder="Your Name"
           required
-          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" 
+          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
-        <input 
-          type="text" 
-          name="skills" 
-          pattern="[A-Za-z, ]+" 
-          placeholder="Skills (e.g., HTML, CSS, JS)" 
+        <input
+          type="text"
+          name="skills"
+          pattern="[A-Za-z, ]+"
+          placeholder="Skills (e.g., HTML, CSS, JS)"
           required
-          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500" 
+          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
         />
-        <textarea 
-          name="bio" 
-          placeholder="Your Bio" 
-          required 
+        <textarea
+          name="bio"
+          placeholder="Your Bio"
+          required
           class="col-span-2 w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-purple-500"
           rows="4"
         ></textarea>
-        <button 
-          type="submit" 
+
+        <!-- Added professional fields -->
+        <input
+          type="email"
+          name="email"
+          placeholder="Email Address"
+          required
+          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+        <input
+          type="tel"
+          name="phone"
+          placeholder="Phone Number"
+          pattern="[0-9+ -]+"
+          required
+          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+        <input
+          type="text"
+          name="linkedin"
+          placeholder="LinkedIn Profile URL"
+          pattern="https?://.+"
+          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+        <input
+          type="text"
+          name="website"
+          placeholder="Personal Website URL"
+          pattern="https?://.+"
+          class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500"
+        />
+
+        <button
+          type="submit"
           class="col-span-2 w-full py-3 rounded-md bg-gradient-to-r from-cyan-500 to-pink-600 text-white font-semibold hover:from-cyan-600 hover:to-pink-700 transition"
         >
           Submit
@@ -61,16 +244,24 @@
         const name = $('input[name="name"]').val();
         const bio = $('textarea[name="bio"]').val();
         const skills = $('input[name="skills"]').val();
+        const email = $('input[name="email"]').val();
+        const phone = $('input[name="phone"]').val();
+        const linkedin = $('input[name="linkedin"]').val();
+        const website = $('input[name="website"]').val();
 
+        // Save in localStorage (you can adjust as per your needs)
         localStorage.setItem('portfolioName', name);
         localStorage.setItem('portfolioBio', bio);
         localStorage.setItem('portfolioSkills', skills);
+        localStorage.setItem('portfolioEmail', email);
+        localStorage.setItem('portfolioPhone', phone);
+        localStorage.setItem('portfolioLinkedIn', linkedin);
+        localStorage.setItem('portfolioWebsite', website);
 
         window.location.href = 'portfolio.html';
       });
     });
   </script>
-
 </body>
 
 </html>
